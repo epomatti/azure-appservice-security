@@ -17,3 +17,7 @@ variable "sku_name" {
 variable "default_subnet_id" {
   type = string
 }
+
+variable "front_door_id" {
+  type = string
+}

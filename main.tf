@@ -31,6 +31,12 @@ module "vnet" {
 #   retention_in_days   = 30
 # }
 
+resource "azurerm_cdn_frontdoor_profile" "default" {
+  name                = "afd-${local.workload}"
+  resource_group_name = azurerm_resource_group.default.name
+  sku_name            = "Standard_AzureFrontDoor"
+}
+
 module "webapp" {
   source              = "./modules/webapp"
   workload            = local.workload
@@ -38,4 +44,5 @@ module "webapp" {
   location            = azurerm_resource_group.default.location
   sku_name            = var.webapp_plan_sku_name
   default_subnet_id   = module.vnet.default_subnet_id
+  front_door_id       = azurerm_cdn_frontdoor_profile.default.resource_guid
 }
