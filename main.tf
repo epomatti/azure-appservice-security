@@ -46,3 +46,9 @@ module "webapp" {
   default_subnet_id   = module.vnet.default_subnet_id
   front_door_id       = azurerm_cdn_frontdoor_profile.default.resource_guid
 }
+
+module "frontdoor" {
+  source                  = "./modules/frontdoor"
+  frontdoor_id            = azurerm_cdn_frontdoor_profile.default.id
+  webapp_default_hostname = module.webapp.default_hostname
+}

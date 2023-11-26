@@ -1,11 +1,7 @@
-variable "workload" {
+variable "frontdoor_id" {
   type = string
 }
 
-variable "resource_group_name" {
-  type = string
-}
-
-variable "location" {
+variable "webapp_default_hostname" {
   type = string
 }

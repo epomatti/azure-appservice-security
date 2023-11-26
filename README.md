@@ -13,7 +13,6 @@ az resource update --resource-group rg-bigfactory --name app-bigfactory --resour
     --set properties.siteConfig.ipSecurityRestrictionsDefaultAction=Deny
 ```
 
-
 ## Front Door security
 
 ### Private Link
