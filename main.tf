@@ -37,4 +37,5 @@ module "webapp" {
   resource_group_name = azurerm_resource_group.default.name
   location            = azurerm_resource_group.default.location
   sku_name            = var.webapp_plan_sku_name
+  default_subnet_id   = module.vnet.default_subnet_id
 }
