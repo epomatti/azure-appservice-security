@@ -38,3 +38,18 @@ resource "azurerm_cdn_frontdoor_origin" "app1" {
   priority           = 1
   weight             = 1000
 }
+
+resource "azurerm_cdn_frontdoor_route" "appservice_nginx" {
+  name                   = "appservice-nginx"
+  enabled                = true
+  link_to_default_domain = true
+
+  cdn_frontdoor_endpoint_id     = azurerm_cdn_frontdoor_endpoint.nginx.id
+  cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.nginx.id
+  cdn_frontdoor_origin_ids      = []
+
+  forwarding_protocol    = "HttpsOnly"
+  https_redirect_enabled = true
+  patterns_to_match      = ["/*"]
+  supported_protocols    = ["Http", "Https"]
+}

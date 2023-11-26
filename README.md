@@ -1,6 +1,6 @@
-# azure-appservice-security
+# Azure App Service Security
 
-Azure App Service security features
+Implementation of Azure App Service security features.
 
 ## Access Restriction
 
