@@ -2,25 +2,33 @@
 
 Implementation of Azure App Service security features.
 
+Create the infrastructure:
+
+```sh
+terraform init
+terraform apply -auto-approve
+```
+
 ## Access Restriction
 
-Controles inbound connectivity, and it comes available when Public Access is set to **TRUE**.
+Controls inbound connectivity. Functionality available when Public Access is set to **TRUE**.
 
 Access can be controlled to the main site and the SCM (Advanced). Advanced can inherit rules from main.
+
+This Terraform configuration will set up automatically ALLOW for:
+
+- Service Tag: `AzureFrontDoor.Backend`
+- HTTP Header: `X-Azure-FDID`
+
+<img src=".assets/appservice-rules.png" />
+
+Do set `Deny` as the unmatched rule:
 
 ```sh
 az resource update --resource-group rg-bigfactory --name app-bigfactory --resource-type "Microsoft.Web/sites" \
     --set properties.siteConfig.ipSecurityRestrictionsDefaultAction=Deny
 ```
 
-## Front Door security
-
-### Private Link
-
-Requires Front Door with Premium SKU.
-
-### 
-
 ## VNET Integration
 
-Only one is supported.
+Only one VNET injection is supported.
