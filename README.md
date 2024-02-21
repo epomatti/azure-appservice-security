@@ -37,4 +37,6 @@ Only one VNET injection is supported.
 
 It is possible to use the Azure backbone to access an App Service from a VM or other services.
 
-Enable service endpoints and check the hops.
+This Terraform project automatically configures `Microsoft.Web` service endpoints for the VM subnet. Running Network Watcher will give the "next hop type" `VirtualNetworkServiceEndpoint`.
+
+When removing the service endpoint, the next hop type will be `Internet`.

@@ -34,6 +34,7 @@ resource "azurerm_linux_virtual_machine" "default" {
   admin_username        = local.username
   admin_password        = "P@ssw0rd.123"
   network_interface_ids = [azurerm_network_interface.default.id]
+  user_data             = file("${path.module}/userdata/ubuntu.sh")
 
   identity {
     type = "SystemAssigned"
