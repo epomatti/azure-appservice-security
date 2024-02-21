@@ -32,3 +32,9 @@ az resource update --resource-group rg-bigfactory --name app-bigfactory --resour
 ## VNET Integration
 
 Only one VNET injection is supported.
+
+## Service Endpoints
+
+It is possible to use the Azure backbone to access an App Service from a VM or other services.
+
+Enable service endpoints and check the hops.

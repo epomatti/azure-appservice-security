@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.81.0"
+      version = "3.92.0"
     }
   }
 }
@@ -51,4 +51,14 @@ module "frontdoor" {
   source                  = "./modules/frontdoor"
   frontdoor_id            = azurerm_cdn_frontdoor_profile.default.id
   webapp_default_hostname = module.webapp.default_hostname
+}
+
+module "vm_linux" {
+  source              = "./modules/vm"
+  workload            = local.workload
+  resource_group_name = azurerm_resource_group.default.name
+  location            = azurerm_resource_group.default.location
+  subnet_id           = module.vnet.compute_subnet_id
+  size                = var.vm_linux_size
+  image_sku           = var.vm_linux_image_sku
 }
