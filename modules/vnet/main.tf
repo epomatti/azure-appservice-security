@@ -28,3 +28,10 @@ resource "azurerm_subnet" "compute" {
   address_prefixes     = ["10.0.10.0/24"]
   service_endpoints    = ["Microsoft.Web"]
 }
+
+resource "azurerm_subnet" "private_endpoints" {
+  name                 = "private-endpoints"
+  resource_group_name  = var.resource_group_name
+  virtual_network_name = azurerm_virtual_network.default.name
+  address_prefixes     = ["10.0.90.0/24"]
+}

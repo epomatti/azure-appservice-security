@@ -17,3 +17,8 @@ variable "vm_linux_image_sku" {
   type    = string
   default = "22_04-lts-arm64"
 }
+
+variable "create_private_endpoint_flag" {
+  type    = bool
+  default = false
+}

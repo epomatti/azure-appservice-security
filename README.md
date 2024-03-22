@@ -40,3 +40,30 @@ It is possible to use the Azure backbone to access an App Service from a VM or o
 This Terraform project automatically configures `Microsoft.Web` service endpoints for the VM subnet. Running Network Watcher will give the "next hop type" `VirtualNetworkServiceEndpoint`.
 
 When removing the service endpoint, the next hop type will be `Internet`.
+
+## Private Endpoints
+
+Couple of [benefits][1]:
+
+- Avoid public endpoints
+- Minimize the possibility of data exfiltration
+- On-premises
+
+
+Set `create_private_endpoint_flag` to `true` to enable the private endpoint:
+
+```terraform
+create_private_endpoint_flag = true
+```
+
+---
+
+### Clean-up
+
+Once done, delete the resources:
+
+```sh
+terraform destroy -auto-approve
+```
+
+[1]: https://learn.microsoft.com/en-us/azure/private-link/private-link-overview
