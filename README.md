@@ -66,4 +66,4 @@ Once done, delete the resources:
 terraform destroy -auto-approve
 ```
 
-[1]: https://learn.microsoft.com/en-us/azure/private-link/private-link-overview
+[1]: https://learn.microsoft.com/en-us/azure/private-link/private-link-overview#key-benefits
