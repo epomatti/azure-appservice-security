@@ -33,7 +33,7 @@ module "monitor" {
 resource "azurerm_cdn_frontdoor_profile" "default" {
   name                = "afd-${local.workload}"
   resource_group_name = azurerm_resource_group.default.name
-  sku_name            = "Standard_AzureFrontDoor"
+  sku_name            = "Premium_AzureFrontDoor"
 }
 
 module "webapp" {

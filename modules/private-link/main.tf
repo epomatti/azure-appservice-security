@@ -11,7 +11,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "web" {
   registration_enabled  = true
 }
 
-resource "azurerm_private_endpoint" "aml" {
+resource "azurerm_private_endpoint" "app_service" {
   name                = "pe-appservice"
   location            = var.location
   resource_group_name = var.resource_group_name
