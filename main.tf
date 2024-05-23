@@ -44,6 +44,13 @@ module "plan" {
   sku_name            = var.webapp_plan_sku_name
 }
 
+module "acr" {
+  source              = "./modules/acr"
+  workload            = local.workload
+  resource_group_name = azurerm_resource_group.default.name
+  location            = azurerm_resource_group.default.location
+}
+
 module "app1" {
   source              = "./modules/webapps/app1"
   workload            = local.workload
