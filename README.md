@@ -65,6 +65,11 @@ export acr=""
 ```
 webapp_deploy_from_acr = true
 
+
+approve private link
+
+
+
 ---
 
 ### Clean-up

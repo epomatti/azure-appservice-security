@@ -70,13 +70,34 @@ module "app1" {
   front_door_id       = azurerm_cdn_frontdoor_profile.default.resource_guid
 }
 
+module "app2" {
+  source              = "./modules/webapps/app2"
+  workload            = local.workload
+  resource_group_name = azurerm_resource_group.default.name
+  location            = azurerm_resource_group.default.location
+  plan_id             = module.plan.plan_id
+  subnet_id           = module.vnet.webapps_subnet_id
+  docker_image_name   = local.docker_image_name
+  docker_registry_url = local.docker_registry_url
+  deploy_from_acr     = var.webapp_deploy_from_acr
+  acr_username        = module.acr.admin_username
+  acr_password        = module.acr.admin_password
+  env_app_path        = var.app2_path
+  front_door_id       = azurerm_cdn_frontdoor_profile.default.resource_guid
+}
+
 module "frontdoor" {
-  source                = "./modules/frontdoor"
-  frontdoor_id          = azurerm_cdn_frontdoor_profile.default.id
+  source       = "./modules/frontdoor"
+  frontdoor_id = azurerm_cdn_frontdoor_profile.default.id
+  location     = var.location
+
   app1_default_hostname = module.app1.default_hostname
-  location              = var.location
   app1_id               = module.app1.appservice_id
   app1_path             = var.app1_path
+
+  app2_default_hostname = module.app2.default_hostname
+  app2_id               = module.app2.appservice_id
+  app2_path             = var.app2_path
 }
 
 module "vm_linux" {
@@ -94,6 +115,6 @@ module "vm_linux" {
 #   resource_group_name         = azurerm_resource_group.default.name
 #   location                    = azurerm_resource_group.default.location
 #   vnet_id                     = module.vnet.vnet_id
-#   appservice_id               = module.webapp.appservice_id
+#   appservice_id               = module.app2.appservice_id
 #   private_endpoints_subnet_id = module.vnet.private_endpoints_subnet_id
 # }
