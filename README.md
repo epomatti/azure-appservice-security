@@ -58,6 +58,13 @@ Set `create_private_endpoint_flag` to `true` to enable the private endpoint:
 create_private_endpoint_flag = true
 ```
 
+## 
+
+export acr=""
+
+```
+webapp_deploy_from_acr = true
+
 ---
 
 ### Clean-up

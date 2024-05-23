@@ -12,7 +12,7 @@ resource "azurerm_cdn_frontdoor_origin_group" "app1" {
 
   health_probe {
     interval_in_seconds = 100
-    path                = "/"
+    path                = "/health"
     protocol            = "Https"
     request_type        = "GET" # Prefer HEAD for production
   }
@@ -56,7 +56,7 @@ resource "azurerm_cdn_frontdoor_route" "app1" {
 
   forwarding_protocol    = "HttpsOnly"
   https_redirect_enabled = true
-  patterns_to_match      = ["/*"]
+  patterns_to_match      = ["${var.app1_path}/*"]
   supported_protocols    = ["Http", "Https"]
 
   depends_on = [azurerm_cdn_frontdoor_origin.app1]

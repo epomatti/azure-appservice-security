@@ -13,3 +13,7 @@ variable "location" {
 variable "app1_id" {
   type = string
 }
+
+variable "app1_path" {
+  type = string
+}

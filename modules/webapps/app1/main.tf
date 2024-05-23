@@ -8,14 +8,17 @@ resource "azurerm_linux_web_app" "main" {
   https_only                    = true
 
   # Only one is supported
-  virtual_network_subnet_id = var.webapps_subnet_id
+  virtual_network_subnet_id = var.subnet_id
 
   site_config {
     always_on         = true
     health_check_path = "/"
 
     application_stack {
-      docker_image_name = "index.docker.io/nginx:latest"
+      docker_image_name        = var.docker_image_name
+      docker_registry_url      = var.docker_registry_url
+      docker_registry_username = var.deploy_from_acr ? var.acr_username : null
+      docker_registry_password = var.deploy_from_acr ? var.acr_password : null
     }
 
     ip_restriction {
@@ -39,5 +42,6 @@ resource "azurerm_linux_web_app" "main" {
   app_settings = {
     DOCKER_ENABLE_CI = true
     WEBSITES_PORT    = "80"
+    APP_PATH         = var.env_app_path
   }
 }

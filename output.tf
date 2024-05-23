@@ -9,3 +9,7 @@ output "frontdoor_endpoint_host_name" {
 output "vm_public_ip" {
   value = module.vm_linux.public_ip
 }
+
+output "acr_name" {
+  value = module.acr.name
+}

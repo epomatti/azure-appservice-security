@@ -9,6 +9,9 @@ terraform {
 
 locals {
   workload = "bigfactory"
+
+  docker_image_name   = var.webapp_deploy_from_acr ? "app:latest" : "nginx:latest"
+  docker_registry_url = var.webapp_deploy_from_acr ? "https://${module.acr.name}.azurecr.io" : "https://index.docker.io"
 }
 
 resource "azurerm_resource_group" "default" {
@@ -57,7 +60,13 @@ module "app1" {
   resource_group_name = azurerm_resource_group.default.name
   location            = azurerm_resource_group.default.location
   plan_id             = module.plan.plan_id
-  webapps_subnet_id   = module.vnet.webapps_subnet_id
+  subnet_id           = module.vnet.webapps_subnet_id
+  docker_image_name   = local.docker_image_name
+  docker_registry_url = local.docker_registry_url
+  deploy_from_acr     = var.webapp_deploy_from_acr
+  acr_username        = module.acr.admin_username
+  acr_password        = module.acr.admin_password
+  env_app_path        = var.app1_path
   front_door_id       = azurerm_cdn_frontdoor_profile.default.resource_guid
 }
 
@@ -67,6 +76,7 @@ module "frontdoor" {
   app1_default_hostname = module.app1.default_hostname
   location              = var.location
   app1_id               = module.app1.appservice_id
+  app1_path             = var.app1_path
 }
 
 module "vm_linux" {

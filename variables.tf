@@ -8,8 +8,8 @@ variable "webapp_plan_sku_name" {
   type = string
 }
 
-variable "webapp_docker_image_name" {
-  type = string
+variable "webapp_deploy_from_acr" {
+  type = bool
 }
 
 variable "app1_path" {
