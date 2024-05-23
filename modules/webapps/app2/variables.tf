@@ -10,7 +10,7 @@ variable "workload" {
   type = string
 }
 
-variable "sku_name" {
+variable "plan_id" {
   type = string
 }
 

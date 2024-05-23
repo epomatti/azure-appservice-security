@@ -1,24 +1,23 @@
 variable "location" {
-  type    = string
-  default = "eastus2"
+  type = string
 }
 
 variable "webapp_plan_sku_name" {
-  type    = string
-  default = "B2"
+  type = string
+}
+
+variable "frontdoor_sku_name" {
+  type = string
 }
 
 variable "vm_linux_size" {
-  type    = string
-  default = "Standard_B2ps_v2"
+  type = string
 }
 
 variable "vm_linux_image_sku" {
-  type    = string
-  default = "22_04-lts-arm64"
+  type = string
 }
 
-variable "create_private_endpoint_flag" {
-  type    = bool
-  default = false
+variable "webapp_docker_image_name" {
+  type = string
 }

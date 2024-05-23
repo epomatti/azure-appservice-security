@@ -1,5 +1,5 @@
-output "webapp_default_hostname" {
-  value = module.webapp.default_hostname
+output "app1_default_hostname" {
+  value = module.app1.default_hostname
 }
 
 output "frontdoor_endpoint_host_name" {

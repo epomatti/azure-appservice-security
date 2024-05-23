@@ -2,12 +2,12 @@ output "vnet_id" {
   value = azurerm_virtual_network.default.id
 }
 
-output "default_subnet_id" {
-  value = azurerm_subnet.default.id
+output "webapps_subnet_id" {
+  value = azurerm_subnet.webapps.id
 }
 
-output "compute_subnet_id" {
-  value = azurerm_subnet.compute.id
+output "virtual_machines_subnet_id" {
+  value = azurerm_subnet.virtual_machines.id
 }
 
 output "private_endpoints_subnet_id" {

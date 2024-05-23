@@ -5,8 +5,8 @@ resource "azurerm_virtual_network" "default" {
   resource_group_name = var.resource_group_name
 }
 
-resource "azurerm_subnet" "default" {
-  name                 = "default"
+resource "azurerm_subnet" "webapps" {
+  name                 = "webapps"
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.default.name
   address_prefixes     = ["10.0.0.0/24"]
@@ -21,8 +21,8 @@ resource "azurerm_subnet" "default" {
   }
 }
 
-resource "azurerm_subnet" "compute" {
-  name                 = "compute"
+resource "azurerm_subnet" "virtual_machines" {
+  name                 = "virtual-machines"
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.default.name
   address_prefixes     = ["10.0.10.0/24"]

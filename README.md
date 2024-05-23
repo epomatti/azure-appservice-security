@@ -9,6 +9,8 @@ terraform init
 terraform apply -auto-approve
 ```
 
+Next, approve the Private Endpoint created by Front Door on behalf of App Service.
+
 ## Access Restriction
 
 Controls inbound connectivity. Functionality available when Public Access is set to **TRUE**.
