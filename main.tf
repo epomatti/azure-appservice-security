@@ -86,6 +86,22 @@ module "app2" {
   front_door_id       = azurerm_cdn_frontdoor_profile.default.resource_guid
 }
 
+module "app3" {
+  source              = "./modules/webapps/app3"
+  workload            = local.workload
+  resource_group_name = azurerm_resource_group.default.name
+  location            = azurerm_resource_group.default.location
+  plan_id             = module.plan.plan_id
+  subnet_id           = module.vnet.webapps_subnet_id
+  docker_image_name   = local.docker_image_name
+  docker_registry_url = local.docker_registry_url
+  deploy_from_acr     = var.webapp_deploy_from_acr
+  acr_username        = module.acr.admin_username
+  acr_password        = module.acr.admin_password
+  env_app_path        = var.app3_path
+}
+
+
 module "frontdoor" {
   source       = "./modules/frontdoor"
   frontdoor_id = azurerm_cdn_frontdoor_profile.default.id
