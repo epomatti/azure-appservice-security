@@ -3,39 +3,42 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"math/rand/v2"
 	"net/http"
 	"os"
+
+	"github.com/gin-gonic/gin"
 )
+
+var path = ""
 
 func main() {
 	port := flag.Int("port", 80, "")
 	flag.Parse()
 
-	path := os.Getenv("APP_PATH")
-	if len(path) == 0 {
-		log.Panic("APP_PATH environment variable is not set")
-	}
-	fmt.Println("Application path: ", path)
+	path = os.Getenv("APP_PATH")
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello, World!\n")
-	})
-
-	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "OK\n")
-	})
-
-	http.HandleFunc(path, func(w http.ResponseWriter, r *http.Request) {
-		rn := rand.IntN(100)
-		rs := fmt.Sprint(rn)
-		fmt.Fprint(w, rs)
-	})
+	r := gin.Default()
+	g := r.Group(path)
+	g.GET("", get)
+	g.GET("/", get)
+	g.GET("/health", healthCheck)
+	g.GET("/health/", healthCheck)
 
 	addr := fmt.Sprintf(":%d", *port)
-	err := http.ListenAndServe(addr, nil)
-	if err != nil {
-		fmt.Println("Error starting the server: ", err)
-	}
+	r.Run(addr)
+}
+
+func get(c *gin.Context) {
+	rn := rand.IntN(10000)
+	c.JSON(http.StatusOK, gin.H{
+		"app":    path,
+		"random": rn,
+	})
+}
+
+func healthCheck(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{
+		"status": "ok",
+	})
 }
