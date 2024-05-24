@@ -101,7 +101,6 @@ module "app3" {
   env_app_path        = var.app3_path
 }
 
-
 module "frontdoor" {
   source       = "./modules/frontdoor"
   frontdoor_id = azurerm_cdn_frontdoor_profile.default.id
