@@ -31,10 +31,6 @@ az resource update --resource-group rg-bigfactory --name app-bigfactory --resour
     --set properties.siteConfig.ipSecurityRestrictionsDefaultAction=Deny
 ```
 
-## VNET Integration
-
-Only one VNET injection is supported.
-
 ## Service Endpoints
 
 It is possible to use the Azure backbone to access an App Service from a VM or other services.
@@ -58,17 +54,43 @@ Set `create_private_endpoint_flag` to `true` to enable the private endpoint:
 create_private_endpoint_flag = true
 ```
 
-## 
+## Front Door latency benchmark
 
-export acr=""
+This project will create three apps to measure differences in latency:
+
+- **App 1** - AFD route with public endpoint.
+- **App 2** - AFD route with private endpoint.
+- **App 3** - No AFD, direct connection to the public endpoint.
+
+
+```sh
+export acr="crbigfactory"
+```
+
+Build and push the custom application:
 
 ```
+cd app
+bash acr-build-push.bash
+```
+
+Back to the root directory, change the configuration to pull from ACR:
+
+```sh
 webapp_deploy_from_acr = true
+```
 
+Apply:
 
-approve private link
+```sh
+terraform apply -auto-approve
+```
 
+Test the routes and measure the latency.
 
+## Virtual Network Integration
+
+Only one VNET injection is supported.
 
 ---
 
