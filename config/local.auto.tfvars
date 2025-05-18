@@ -3,7 +3,7 @@ subscription_id = "00000000-0000-0000-0000-000000000000"
 location        = "eastus2"
 
 ### App Service ###
-webapp_plan_sku_name   = "P1v3"
+webapp_plan_sku_name   = "P1v3" # V2 is legacy now, althouhg it was cheaper for the same name pattern
 webapp_deploy_from_acr = true
 
 # AFD routing

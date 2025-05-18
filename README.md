@@ -117,8 +117,7 @@ Check the supported [platforms and file types](https://learn.microsoft.com/en-us
 
 You can use an example from [App Service WebJobs Quickstart](https://github.com/Azure-Samples/App-Service-WebJobs-Quickstart) repository on GitHub.
 
-
-
+Deploy the webjob directly from the portal or using ingrations.
 
 ---
 
