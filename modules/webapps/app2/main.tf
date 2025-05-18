@@ -11,8 +11,9 @@ resource "azurerm_linux_web_app" "main" {
   virtual_network_subnet_id = var.subnet_id
 
   site_config {
-    always_on         = true
-    health_check_path = "/"
+    always_on                         = true
+    health_check_path                 = "/"
+    health_check_eviction_time_in_min = 5
 
     application_stack {
       docker_image_name        = var.docker_image_name
