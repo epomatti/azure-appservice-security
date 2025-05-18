@@ -15,6 +15,12 @@ Set the variables:
 cp config/local.auto.tfvars .auto.tfvars
 ```
 
+Control the docker image deployment:
+
+```terraform
+webapp_deploy_from_acr = true
+```
+
 Create the infrastructure:
 
 ```sh
@@ -104,6 +110,15 @@ Test the routes and measure the latency.
 ## Virtual Network Integration
 
 Only one VNET injection is supported.
+
+## WebJobs
+
+Check the supported [platforms and file types](https://learn.microsoft.com/en-us/azure/app-service/overview-webjobs#supported-platforms-and-file-types) and [scaling considerations](https://learn.microsoft.com/en-us/azure/app-service/overview-webjobs#scaling-considerations).
+
+You can use an example from [App Service WebJobs Quickstart](https://github.com/Azure-Samples/App-Service-WebJobs-Quickstart) repository on GitHub.
+
+
+
 
 ---
 

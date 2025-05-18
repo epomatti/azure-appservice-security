@@ -36,6 +36,10 @@ resource "azurerm_linux_virtual_machine" "default" {
   network_interface_ids = [azurerm_network_interface.default.id]
   user_data             = filebase64("${path.module}/userdata/ubuntu.sh")
 
+  # Diff was complaining about this
+  bypass_platform_safety_checks_on_user_schedule_enabled = true
+  patch_mode                                             = "AutomaticByPlatform"
+
   identity {
     type = "SystemAssigned"
   }

@@ -101,8 +101,16 @@ module "app3" {
   env_app_path        = var.app3_path
 }
 
+module "webjob1" {
+  source              = "./modules/webapps/webjob1"
+  workload            = local.workload
+  resource_group_name = azurerm_resource_group.default.name
+  location            = azurerm_resource_group.default.location
+  plan_id             = module.plan.plan_id
+}
+
 module "frontdoor" {
-  count        = var.deploy_frontdoor == true ? 1 : 1
+  count        = var.deploy_frontdoor == true ? 1 : 0
   source       = "./modules/frontdoor"
   frontdoor_id = azurerm_cdn_frontdoor_profile.default.id
   location     = var.location
@@ -126,12 +134,3 @@ module "vm_linux" {
   image_sku           = var.vm_linux_image_sku
   vm_key_path         = var.vm_key_path
 }
-
-# module "private_endpoints" {
-#   source                      = "./modules/private-link"
-#   resource_group_name         = azurerm_resource_group.default.name
-#   location                    = azurerm_resource_group.default.location
-#   vnet_id                     = module.vnet.vnet_id
-#   appservice_id               = module.app2.appservice_id
-#   private_endpoints_subnet_id = module.vnet.private_endpoints_subnet_id
-# }
