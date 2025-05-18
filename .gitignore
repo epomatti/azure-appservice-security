@@ -1,3 +1,5 @@
+.keys/
+
 # Local .terraform directories
 **/.terraform/*
 

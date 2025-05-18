@@ -2,7 +2,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "3.104.2"
+      version = ">= 4.0.0"
     }
   }
 }
@@ -102,6 +102,7 @@ module "app3" {
 }
 
 module "frontdoor" {
+  count        = var.deploy_frontdoor == true ? 1 : 1
   source       = "./modules/frontdoor"
   frontdoor_id = azurerm_cdn_frontdoor_profile.default.id
   location     = var.location
@@ -123,6 +124,7 @@ module "vm_linux" {
   subnet_id           = module.vnet.virtual_machines_subnet_id
   size                = var.vm_linux_size
   image_sku           = var.vm_linux_image_sku
+  vm_key_path         = var.vm_key_path
 }
 
 # module "private_endpoints" {

@@ -2,6 +2,19 @@
 
 Implementation of Azure App Service security features.
 
+Create the key:
+
+```sh
+mkdir -p .keys
+ssh-keygen -f .keys/tmp_rsa
+```
+
+Set the variables:
+
+```sh
+cp config/local.auto.tfvars .auto.tfvars
+```
+
 Create the infrastructure:
 
 ```sh

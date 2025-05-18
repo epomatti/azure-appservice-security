@@ -1,4 +1,8 @@
 ### General ###
+variable "subscription_id" {
+  type = string
+}
+
 variable "location" {
   type = string
 }
@@ -25,11 +29,19 @@ variable "app3_path" {
 }
 
 ### Front Door ###
+variable "deploy_frontdoor" {
+  type = bool
+}
+
 variable "frontdoor_sku_name" {
   type = string
 }
 
 ### Virtual Machine ###
+variable "vm_key_path" {
+  type = string
+}
+
 variable "vm_linux_size" {
   type = string
 }

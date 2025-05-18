@@ -3,7 +3,7 @@ output "app1_default_hostname" {
 }
 
 output "frontdoor_endpoint_host_name" {
-  value = module.frontdoor.endpoint_host_name
+  value = var.deploy_frontdoor == true ? module.frontdoor.endpoint_host_name : null
 }
 
 output "vm_public_ip" {

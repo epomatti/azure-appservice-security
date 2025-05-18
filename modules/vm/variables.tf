@@ -22,3 +22,6 @@ variable "image_sku" {
   type = string
 }
 
+variable "vm_key_path" {
+  type = string
+}
